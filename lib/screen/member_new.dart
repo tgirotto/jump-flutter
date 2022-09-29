@@ -6,7 +6,6 @@ import 'package:greece/model/edge.dart';
 import 'package:greece/model/page.dart' as p;
 import 'package:greece/model/store.dart' as s;
 import 'package:greece/model/user.dart';
-import 'package:greece/model/user_type.dart';
 import 'package:greece/screen/members.dart';
 
 class NewMemberScreen extends StatefulWidget {
@@ -58,7 +57,6 @@ class CustomerDetailsScreenState extends State<NewMemberScreen> {
   User? member;
   TextEditingController? fullNameController = TextEditingController(text: "");
   TextEditingController phoneController = TextEditingController(text: "");
-  UserType? userType;
 
   createUser() async {
     await GraphQL.client.mutate(MutationOptions(
@@ -68,7 +66,7 @@ class CustomerDetailsScreenState extends State<NewMemberScreen> {
           'full_name': fullNameController?.text,
           'phone': "+255" + (phoneController.text),
           'store': {'id': widget.store?.id},
-          'user_type': {'id': userType?.id}
+          'user_type': 'OWNER'
         }
       },
     ));
@@ -98,8 +96,8 @@ class CustomerDetailsScreenState extends State<NewMemberScreen> {
                 return const Text('Loading');
               }
 
-              p.Page<UserType> page = p.Page<UserType>.fromJson(
-                  result.data?['userTypes']['page'], UserType.fromJson);
+              // p.Page<String> page = p.Page<String>.fromJson(
+              //     result.data?['userTypes']['page'], UserType.fromJson);
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -157,23 +155,23 @@ class CustomerDetailsScreenState extends State<NewMemberScreen> {
                             ),
                           ),
                         )),
-                    Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: DropdownButton<UserType>(
-                          isExpanded: true,
-                          value: userType,
-                          items: page.edges.map((Edge<UserType> value) {
-                            return DropdownMenuItem<UserType>(
-                              value: value.node,
-                              child: Text(value.node.name),
-                            );
-                          }).toList(),
-                          onChanged: (e) {
-                            setState(() {
-                              userType = e;
-                            });
-                          },
-                        )),
+                    // Padding(
+                    //     padding: const EdgeInsets.only(top: 8.0),
+                    //     child: DropdownButton<UserType>(
+                    //       isExpanded: true,
+                    //       value: userType,
+                    //       items: page.edges.map((Edge<UserType> value) {
+                    //         return DropdownMenuItem<UserType>(
+                    //           value: value.node,
+                    //           child: Text(value.node.name),
+                    //         );
+                    //       }).toList(),
+                    //       onChanged: (e) {
+                    //         setState(() {
+                    //           userType = e;
+                    //         });
+                    //       },
+                    //     )),
                     Expanded(
                         child: Align(
                             alignment: Alignment.bottomCenter,

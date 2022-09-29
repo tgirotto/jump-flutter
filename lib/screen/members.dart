@@ -123,7 +123,7 @@ class MembersScreenState extends State<MembersScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
                       title: Text(members[index].fullName),
-                      subtitle: Text(members[index].userType?.name as String),
+                      subtitle: Text(members[index].userType as String),
                       onTap: () => {
                         // Navigator.push(
                         //     context,

@@ -24,44 +24,19 @@ class LoginScreenState extends State<LoginScreen> {
   TextEditingController phoneController = new TextEditingController();
 
   final String phoneLoginGql = """
-  mutation phoneLogin(\$phoneLoginInput: PhoneLoginInput!) {
-    phoneLogin(phoneLoginInput: \$phoneLoginInput) {
+  mutation phoneLogin(\$phone: String!) {
+    phoneLogin(phone: \$phone) {
       access_token,
       refresh_token
     }
   }
   """;
 
-  final String storesGql = """
-  query stores() {
-    stores() {
-      id,
-      name
-    }
-  }
-""";
-
   final String meGql = """
   query me() {
     me() {
       id,
-      full_name,
-      phone,
-      email,
-      company {
-        id,
-        name
-      },
-      user_type {
-        id,
-        name
-      },
-      store {
-        id,
-        name,
-        phone,
-        address
-      }
+      full_name
     }
   }
 """;
@@ -100,9 +75,7 @@ class LoginScreenState extends State<LoginScreen> {
     QueryResult result = await GraphQL.client.mutate(MutationOptions(
       document: gql(phoneLoginGql),
       variables: {
-        'phoneLoginInput': {
-          'phone': "+255${phoneController.text}",
-        }
+        'phone': "+255${phoneController.text}",
       },
     ));
 

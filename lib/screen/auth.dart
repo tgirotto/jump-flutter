@@ -19,33 +19,14 @@ class AuthScreen extends StatelessWidget {
     me() {
       id,
       full_name,
-      phone,
-      email,
-      user_type {
+      user_type,
+      account {
         id,
-        name
+        phone
       },
       company {
         id,
         name,
-        company_type {
-          id,
-          name
-        }
-      },
-      store {
-        id,
-        name,
-        phone,
-        address,
-        store_type {
-          id,
-          name
-        },
-        store_categories {
-          id,
-          name
-        }
       }
     }
   }

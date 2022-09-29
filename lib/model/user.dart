@@ -1,7 +1,6 @@
 import 'package:greece/model/company.dart';
 import 'package:greece/model/entity.dart';
 import 'package:greece/model/store.dart' as s;
-import 'package:greece/model/user_type.dart';
 
 class User extends Entity {
   int? id;
@@ -10,7 +9,7 @@ class User extends Entity {
   String? phone;
   Company company;
   s.Store? store;
-  UserType? userType;
+  String? userType;
 
   User(
       {this.id,
@@ -33,7 +32,7 @@ class User extends Entity {
         phone: json['phone'],
         company: Company.fromJson(json['company']),
         store: store,
-        userType: UserType.fromJson(json['user_type']),
+        userType: json['user_type'],
         email: json['email']);
 
     return u;

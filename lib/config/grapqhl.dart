@@ -6,7 +6,7 @@ class GraphQL {
   // static String endpoint = 'https://api.jump.getpolygraph.com/graphql';
   // static String endpoint = 'https://dev.api.jump.getpolygraph.com/graphql';
   // static String endpoint = 'http://192.168.178.172:3000/graphql';
-  static String endpoint = 'http://192.168.1.6:3000/graphql';
+  static String endpoint = 'http://192.168.1.6/graphql';
 
   static final httpLink = HttpLink(
     endpoint,

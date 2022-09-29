@@ -28,8 +28,8 @@ class VerifyScreenState extends State<VerifyOtpScreen> {
   String error = "";
   late User me;
   final String otpGql = """
-  mutation verifyToken(\$verifyTokenInput: VerifyTokenInput!) {
-    verifyToken(verifyTokenInput: \$verifyTokenInput) {
+  mutation verifyToken(\$token: String!) {
+    verifyToken(token: \$token) {
       access_token,
       refresh_token
     }
@@ -41,33 +41,12 @@ class VerifyScreenState extends State<VerifyOtpScreen> {
     me() {
       id,
       full_name,
-      phone,
-      email,
-      user_type {
-        id,
-        name
+      account {
+        id
       },
       company {
         id,
-        name,
-        company_type {
-          id,
-          name
-        }
-      },
-      store {
-        id,
-        name,
-        phone,
-        address,
-        store_categories {
-          id,
-          name
-        },
-        store_type {
-          id,
-          name
-        }
+        name
       }
     }
   }
@@ -95,9 +74,7 @@ class VerifyScreenState extends State<VerifyOtpScreen> {
     });
     result = await GraphQL.client.mutate(MutationOptions(
       document: gql(otpGql),
-      variables: {
-        'verifyTokenInput': {'token': otpController.text}
-      },
+      variables: {'token': otpController.text},
     ));
 
     if (result.hasException || result.data == null) {
