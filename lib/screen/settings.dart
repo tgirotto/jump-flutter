@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:greece/config/grapqhl.dart';
 import 'package:greece/config/storage.dart';
+import 'package:greece/model/company.dart';
 import 'package:greece/model/store.dart' as s;
 import 'package:greece/model/user.dart';
+import 'package:greece/screen/home.dart';
 import 'package:greece/screen/login.dart';
 
 const String removeMeQuery = """
@@ -17,7 +19,10 @@ const String removeMeQuery = """
 class SettingScreen extends StatelessWidget {
   final User user;
   final s.Store? store;
-  const SettingScreen({Key? key, required this.user, required this.store})
+  final Company? company;
+
+  const SettingScreen(
+      {Key? key, required this.user, required this.store, this.company})
       : super(key: key);
 
   removeMe(BuildContext context) async {
@@ -40,6 +45,20 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<ListTile> tiles = [
       ListTile(
+        title: const Text("Members"),
+        onTap: () {
+          // Navigator.of(context).pushReplacement(PageRouteBuilder(
+          //   pageBuilder: (context, animation1, animation2) => MembersScreen(
+          //     user: user,
+          //     store: store,
+          //     company: company,
+          //   ),
+          //   transitionDuration: Duration.zero,
+          //   reverseTransitionDuration: Duration.zero,
+          // ));
+        },
+      ),
+      ListTile(
           title: const Text("Logout"),
           onTap: () => {
                 JumpStorage.storage.deleteAll(),
@@ -56,7 +75,21 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Settings'),
-          automaticallyImplyLeading: true,
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => {
+              Navigator.of(context).pushReplacement(PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) => HomeScreen(
+                  user: user,
+                  store: store,
+                  company: company,
+                ),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero,
+              ))
+            },
+          ),
         ),
         body: ListView.builder(
             itemCount: tiles.length,

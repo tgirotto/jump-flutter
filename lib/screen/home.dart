@@ -8,6 +8,7 @@ import 'package:greece/model/user.dart';
 import 'package:greece/screen/loans.dart';
 import 'package:greece/screen/login.dart';
 import 'package:greece/screen/members.dart';
+import 'package:greece/screen/settings.dart';
 
 const String removeMeQuery = """
     mutation removeMe {
@@ -45,20 +46,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<ListTile> tiles = [
       ListTile(
-        title: const Text("Members"),
-        onTap: () {
-          // Navigator.of(context).pushReplacement(PageRouteBuilder(
-          //   pageBuilder: (context, animation1, animation2) => MembersScreen(
-          //     user: user,
-          //     store: store,
-          //     company: company,
-          //   ),
-          //   transitionDuration: Duration.zero,
-          //   reverseTransitionDuration: Duration.zero,
-          // ));
-        },
-      ),
-      ListTile(
         title: const Text("Loans"),
         onTap: () {
           Navigator.of(context).pushReplacement(PageRouteBuilder(
@@ -72,16 +59,26 @@ class HomeScreen extends StatelessWidget {
           ));
         },
       ),
-      ListTile(
-          title: const Text("Delete my account"),
-          onTap: () async => {await removeMe(context)}),
     ];
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
-          automaticallyImplyLeading: true,
-        ),
+            title: const Text('Home'),
+            automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.account_circle),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        SettingScreen(
+                            user: user, store: store, company: company),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                  ));
+                },
+              ),
+            ]),
         body: ListView.builder(
             itemCount: tiles.length,
             itemBuilder: (BuildContext context, int index) {
