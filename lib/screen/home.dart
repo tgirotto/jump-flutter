@@ -61,6 +61,35 @@ class HomeScreen extends StatelessWidget {
       ),
     ];
 
+    Widget horizontalList1 = new Container(
+        // margin: EdgeInsets.symmetric(vertical: 20.0),
+        height: 200.0,
+        child: new ListView(
+          scrollDirection: Axis.horizontal,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(right: 5),
+              width: 160.0,
+              color: Colors.red,
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 5),
+              width: 160.0,
+              color: Colors.orange,
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 5),
+              width: 160.0,
+              color: Colors.pink,
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 5),
+              width: 160.0,
+              color: Colors.yellow,
+            ),
+          ],
+        ));
+
     return Scaffold(
         appBar: AppBar(
             title: const Text('Home'),
@@ -79,10 +108,69 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
             ]),
-        body: ListView.builder(
-            itemCount: tiles.length,
-            itemBuilder: (BuildContext context, int index) {
-              return tiles[index];
-            }));
+        body: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: <Widget>[
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 150,
+                    child: Center(child: Text("Your credit score is 5.4")),
+                  )),
+              horizontalList1,
+              Text("Your pending loans"),
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 50,
+                    child: Center(child: Text("Tommaso Girotto owes you xxx")),
+                  )),
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 50,
+                    child: Center(child: Text("Tommaso Girotto owes you xxx")),
+                  )),
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 50,
+                    child: Center(child: Text("Tommaso Girotto owes you xxx")),
+                  )),
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 50,
+                    child: Center(child: Text("Tommaso Girotto owes you xxx")),
+                  )),
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 50,
+                    child: Center(child: Text("Tommaso Girotto owes you xxx")),
+                  )),
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 50,
+                    child: Center(child: Text("Tommaso Girotto owes you xxx")),
+                  )),
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 50,
+                    child: Center(child: Text("Tommaso Girotto owes you xxx")),
+                  )),
+              Card(
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    height: 50,
+                    child: Center(child: Text("Tommaso Girotto owes you xxx")),
+                  )),
+            ],
+          ),
+        ));
   }
 }
