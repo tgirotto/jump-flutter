@@ -24,6 +24,7 @@ String homeQuery = """
       loans {
         id, 
         principal,
+        loan_status,
         customer {
           id,
           full_name,
@@ -32,7 +33,8 @@ String homeQuery = """
       },
       credits {
         id,
-        principal
+        principal,
+        credit_status
       }
     }
   }
@@ -165,11 +167,17 @@ class HomeScreenState extends State<HomeScreen> {
                         width: 160.0,
                         color: Colors.red,
                         child: Center(
-                          child: Text(NumberFormat.simpleCurrency(
-                                  locale: "en_US",
-                                  name: "TSh",
-                                  decimalDigits: 2)
-                              .format(e.principal)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(NumberFormat.simpleCurrency(
+                                      locale: "en_US",
+                                      name: "TSh",
+                                      decimalDigits: 2)
+                                  .format(e.principal)),
+                              Text(e.creditStatus)
+                            ],
+                          ),
                         )),
                   ),
                 )

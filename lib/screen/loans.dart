@@ -134,7 +134,9 @@ class LoansScreenState extends State<LoansScreen> {
                     itemCount: loans.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                        title: Text(loans[index].customer!.fullName),
+                        title: Text(loans[index].customer!.fullName +
+                            " - " +
+                            loans[index].loanStatus),
                         subtitle: Text(NumberFormat.simpleCurrency(
                                 locale: "en_US", name: "TSh", decimalDigits: 2)
                             .format(loans[index].principal)),
@@ -188,6 +190,7 @@ String members = """
       entries {
         id,
         principal,
+        credit_status,
         customer {
           id,
           full_name,

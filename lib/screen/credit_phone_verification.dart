@@ -76,12 +76,6 @@ class CreditPhoneVerificationScreenState
       isLoading = false;
       searchedUser = user;
     });
-    // Navigator.pushAndRemoveUntil(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (_) =>
-    //             ExpensesScreen(widget.user, widget.store, widget.company)),
-    //     (route) => false);
   }
 
   @override

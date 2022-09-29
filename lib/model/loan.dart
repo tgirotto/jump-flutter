@@ -7,9 +7,14 @@ class Loan extends Entity {
   Company? company;
   User? customer;
   double principal;
+  String loanStatus;
 
   Loan(
-      {required this.id, this.company, this.customer, required this.principal});
+      {required this.id,
+      this.company,
+      this.customer,
+      required this.principal,
+      required this.loanStatus});
 
   static Loan fromJson(Map<String, dynamic> json) {
     Company? company;
@@ -27,6 +32,7 @@ class Loan extends Entity {
     return Loan(
         id: json['id'],
         company: company,
+        loanStatus: json['loan_status'],
         customer: customer,
         principal: json['principal'].toDouble());
   }

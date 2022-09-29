@@ -5,17 +5,18 @@ import 'package:greece/model/company.dart';
 import 'package:greece/model/credit.dart';
 import 'package:greece/model/store.dart' as s;
 import 'package:greece/model/user.dart';
+import 'package:greece/screen/credit_redemption_confirmation.dart';
 import 'package:greece/screen/customer_new.dart';
 import 'package:greece/screen/home.dart';
 
-class CreditRedemptionScreen extends StatefulWidget {
+class CreditRedemptionReviewScreen extends StatefulWidget {
   final User user;
   final s.Store? store;
   final Company? company;
   final Credit credit;
   final User customer;
 
-  CreditRedemptionScreen(
+  CreditRedemptionReviewScreen(
       {Key? key,
       required this.store,
       required this.customer,
@@ -25,10 +26,12 @@ class CreditRedemptionScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  CreditRedemptionScreenState createState() => CreditRedemptionScreenState();
+  CreditRedemptionReviewScreenState createState() =>
+      CreditRedemptionReviewScreenState();
 }
 
-class CreditRedemptionScreenState extends State<CreditRedemptionScreen> {
+class CreditRedemptionReviewScreenState
+    extends State<CreditRedemptionReviewScreen> {
   late TextEditingController phoneController = TextEditingController(text: "");
 
   @override
@@ -37,48 +40,39 @@ class CreditRedemptionScreenState extends State<CreditRedemptionScreen> {
   }
 
   final String searchUserQuery = """
-  query searchUser(\$phone: String!) {
-    searchUser(phone: \$phone) {
-      id,
-      full_name,
-      credit_score
+  mutation createLoan(\$credit_id: Int!, \$customer_id: Int!) {
+    createLoan(credit_id: \$credit_id, customer_id: \$customer_id) {
+      id
     }
   }
   """;
   bool isLoading = false;
-  int searchCount = 0;
-  User? searchedUser;
 
-  Future searchUser() async {
+  Future createLoan() async {
     setState(() {
-      searchCount++;
       isLoading = true;
     });
 
-    QueryResult result = await GraphQL.client.mutate(MutationOptions(
-      document: gql(searchUserQuery),
-      variables: {'phone': "+255${phoneController.text}"},
-    ));
+    QueryResult result = await GraphQL.client
+        .mutate(MutationOptions(document: gql(searchUserQuery), variables: {
+      'credit_id': widget.credit.id,
+      'customer_id': widget.customer.id,
+    }));
 
-    if (result.data == null || result.data!['searchUser'] == null) {
+    if (result.data == null || result.data!['createLoan'] == null) {
       setState(() {
         isLoading = false;
-        searchedUser = null;
       });
       return;
     }
 
-    User user = User.fromJson(result.data?['searchUser']);
-    setState(() {
-      isLoading = false;
-      searchedUser = user;
-    });
-    // Navigator.pushAndRemoveUntil(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (_) =>
-    //             ExpensesScreen(widget.user, widget.store, widget.company)),
-    //     (route) => false);
+    Navigator.of(context).pushReplacement(PageRouteBuilder(
+      pageBuilder: (context, animation1, animation2) =>
+          CreditRedemptionConfirmationScreen(
+              user: widget.user, store: widget.store, company: widget.company),
+      transitionDuration: Duration.zero,
+      reverseTransitionDuration: Duration.zero,
+    ));
   }
 
   @override
@@ -117,6 +111,7 @@ class CreditRedemptionScreenState extends State<CreditRedemptionScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          createLoan();
           // Navigator.push(
           //     context,
           //     MaterialPageRoute(

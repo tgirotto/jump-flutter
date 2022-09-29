@@ -92,23 +92,25 @@ class CreditDetailsScreenState extends State<CreditDetailsScreen> {
         ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.of(context).pushReplacement(PageRouteBuilder(
-            pageBuilder: (context, animation1, animation2) =>
-                CreditPhoneVerificationScreen(
-                    user: widget.user,
-                    store: widget.store,
-                    credit: widget.credit,
-                    company: widget.company),
-            transitionDuration: Duration.zero,
-            reverseTransitionDuration: Duration.zero,
-          ));
-        },
-        backgroundColor: Colors.blue,
-        icon: const Icon(Icons.shopping_bag),
-        label: const Text("Check credit score"),
-      ),
+      floatingActionButton: (widget.credit.creditStatus == 'INITIALISED')
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) =>
+                      CreditPhoneVerificationScreen(
+                          user: widget.user,
+                          store: widget.store,
+                          credit: widget.credit,
+                          company: widget.company),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ));
+              },
+              backgroundColor: Colors.blue,
+              icon: const Icon(Icons.shopping_bag),
+              label: const Text("Check credit score"),
+            )
+          : Container(),
     );
   }
 }

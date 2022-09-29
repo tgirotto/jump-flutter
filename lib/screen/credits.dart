@@ -137,9 +137,8 @@ class CreditsScreenState extends State<CreditsScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         subtitle: const Text("via mPesa"),
-                        title: Text(NumberFormat.simpleCurrency(
-                                locale: "en_US", name: "TSh", decimalDigits: 2)
-                            .format(credits[index].principal)),
+                        title: Text(
+                            "${NumberFormat.simpleCurrency(locale: "en_US", name: "TSh", decimalDigits: 2).format(credits[index].principal)} ${credits[index].creditStatus}"),
                         onTap: () => {
                           Navigator.of(context)
                               .pushReplacement(PageRouteBuilder(
@@ -192,6 +191,7 @@ String members = """
         principal,
         interest,
         period_days,
+        credit_status,
         company {
           id,
           name,

@@ -56,12 +56,13 @@ class CustomerDetailsScreenState extends State<CustomerNewScreen> {
     User customer = User.fromJson(result.data?["createCustomer"]);
 
     Navigator.of(context).pushReplacement(PageRouteBuilder(
-      pageBuilder: (context, animation1, animation2) => CreditRedemptionScreen(
-          user: widget.user,
-          store: widget.store,
-          customer: customer,
-          credit: widget.credit,
-          company: widget.company),
+      pageBuilder: (context, animation1, animation2) =>
+          CreditRedemptionReviewScreen(
+              user: widget.user,
+              store: widget.store,
+              customer: customer,
+              credit: widget.credit,
+              company: widget.company),
       transitionDuration: Duration.zero,
       reverseTransitionDuration: Duration.zero,
     ));
