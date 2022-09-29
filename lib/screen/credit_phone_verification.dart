@@ -6,6 +6,7 @@ import 'package:greece/model/credit.dart';
 import 'package:greece/model/loan.dart';
 import 'package:greece/model/store.dart' as s;
 import 'package:greece/model/user.dart';
+import 'package:greece/screen/customer_new.dart';
 import 'package:greece/screen/home.dart';
 import 'package:greece/screen/loans.dart';
 import 'package:intl/intl.dart';
@@ -173,8 +174,37 @@ class CreditPhoneVerificationScreenState
               : (searchCount == 0)
                   ? Container(child: Text("Insert a phone number"))
                   : Container(
-                      child: Text(
-                          "Can't find what you are looking for? Add a new user"))
+                      child: Column(
+                      children: [
+                        const Text("User not found"),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ))),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushReplacement(PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) =>
+                                  CustomerNewScreen(
+                                      user: widget.user,
+                                      store: widget.store,
+                                      credit: widget.credit,
+                                      company: widget.company),
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero,
+                            ));
+                          },
+                          child: const Text('Add customer',
+                              style: TextStyle(fontSize: 20)),
+                          // color: Colors.blue,
+                          // textColor: Colors.white,
+                          // elevation: 5,
+                        )
+                      ],
+                    ))
         ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
