@@ -136,13 +136,13 @@ class CustomerDetailsScreenState extends State<MemberDetailsScreen> {
                         ))),
                         onPressed: () async {
                           await this.updateUser();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MembersScreen(
-                                      user: widget.user,
-                                      store: widget.store,
-                                      company: widget.company)));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => MembersScreen(
+                          //             user: widget.user,
+                          //             store: widget.store,
+                          //             company: widget.company)));
                         },
                         child:
                             const Text('Save', style: TextStyle(fontSize: 20)),

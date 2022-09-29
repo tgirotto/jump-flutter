@@ -5,6 +5,7 @@ import 'package:greece/config/storage.dart';
 import 'package:greece/model/company.dart';
 import 'package:greece/model/store.dart' as s;
 import 'package:greece/model/user.dart';
+import 'package:greece/screen/loans.dart';
 import 'package:greece/screen/login.dart';
 import 'package:greece/screen/members.dart';
 
@@ -19,7 +20,7 @@ const String removeMeQuery = """
 class HomeScreen extends StatelessWidget {
   final User user;
   final s.Store? store;
-  final Company company;
+  final Company? company;
   const HomeScreen(
       {Key? key, required this.user, this.store, required this.company})
       : super(key: key);
@@ -46,8 +47,22 @@ class HomeScreen extends StatelessWidget {
       ListTile(
         title: const Text("Members"),
         onTap: () {
+          // Navigator.of(context).pushReplacement(PageRouteBuilder(
+          //   pageBuilder: (context, animation1, animation2) => MembersScreen(
+          //     user: user,
+          //     store: store,
+          //     company: company,
+          //   ),
+          //   transitionDuration: Duration.zero,
+          //   reverseTransitionDuration: Duration.zero,
+          // ));
+        },
+      ),
+      ListTile(
+        title: const Text("Loans"),
+        onTap: () {
           Navigator.of(context).pushReplacement(PageRouteBuilder(
-            pageBuilder: (context, animation1, animation2) => MembersScreen(
+            pageBuilder: (context, animation1, animation2) => LoansScreen(
               user: user,
               store: store,
               company: company,

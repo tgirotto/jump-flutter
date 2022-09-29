@@ -7,7 +7,7 @@ class User extends Entity {
   String fullName;
   String? email;
   String? phone;
-  Company company;
+  Company? company;
   s.Store? store;
   String? userType;
 
@@ -26,11 +26,17 @@ class User extends Entity {
     if (json['store'] != null) {
       store = s.Store.fromJson(json['store']);
     }
+
+    Company? company;
+    if (json['company'] != null) {
+      store = s.Store.fromJson(json['company']);
+    }
+
     User u = User(
         fullName: json['full_name'],
         id: json['id'],
         phone: json['phone'],
-        company: Company.fromJson(json['company']),
+        company: company,
         store: store,
         userType: json['user_type'],
         email: json['email']);

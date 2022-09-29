@@ -1,21 +1,21 @@
 class PageInfo {
-  String? startCursor;
-  String? endCursor;
-  bool hasNextPage;
-  bool hasPreviousPage;
+  int limit;
+  int offset;
+  int total;
+  String sort;
 
   PageInfo(
-      {this.startCursor,
-      this.endCursor,
-      required this.hasNextPage,
-      required this.hasPreviousPage});
+      {required this.limit,
+      required this.offset,
+      required this.sort,
+      required this.total});
 
   factory PageInfo.fromJson(Map<String, dynamic> json) {
     return PageInfo(
-        startCursor: json['startCursor'],
-        endCursor: json['endCursor'],
-        hasNextPage: json['hasNextPage'] ?? true,
-        hasPreviousPage: json['hasPreviousPage'] ?? false);
+        limit: json['limit'],
+        offset: json['offset'],
+        sort: json['sort'] ?? '',
+        total: json['total']);
   }
 
   Map<String, dynamic> toJson() => {};

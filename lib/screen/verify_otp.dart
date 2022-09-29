@@ -106,8 +106,8 @@ class VerifyScreenState extends State<VerifyOtpScreen> {
 
     // fcm(me);
     if (me.company?.companyType?.name == 'Distributor') {
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => CompaniesScreen(user: me, store: me.store)));
+      // Navigator.of(context).push(MaterialPageRoute(
+      //     builder: (context) => CompaniesScreen(user: me, store: me.store)));
     } else {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) =>

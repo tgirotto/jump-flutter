@@ -168,12 +168,12 @@ class AuthScreen extends StatelessWidget {
     // String value = await storage.read(key: key);
 
     if (user.company?.companyType?.name == 'Distributor') {
-      Navigator.of(context).pushReplacement(PageRouteBuilder(
-        pageBuilder: (context, animation1, animation2) =>
-            CompaniesScreen(user: user, store: user.store),
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
-      ));
+      // Navigator.of(context).pushReplacement(PageRouteBuilder(
+      //   pageBuilder: (context, animation1, animation2) =>
+      //       CompaniesScreen(user: user, store: user.store),
+      //   transitionDuration: Duration.zero,
+      //   reverseTransitionDuration: Duration.zero,
+      // ));
     } else {
       Navigator.of(context).pushReplacement(PageRouteBuilder(
         pageBuilder: (context, animation1, animation2) =>

@@ -11,7 +11,7 @@ import 'package:greece/screen/members.dart';
 class NewMemberScreen extends StatefulWidget {
   final User user;
   final s.Store? store;
-  final Company company;
+  final Company? company;
 
   const NewMemberScreen(
       {Key? key, required this.user, this.store, required this.company})
@@ -187,13 +187,13 @@ class CustomerDetailsScreenState extends State<NewMemberScreen> {
                                   ))),
                                   onPressed: () async {
                                     await createUser();
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => MembersScreen(
-                                                user: widget.user,
-                                                store: widget.store,
-                                                company: widget.company)));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => MembersScreen(
+                                    //             user: widget.user,
+                                    //             store: widget.store,
+                                    //             company: widget.company)));
                                   },
                                   child: const Text('Save',
                                       style: TextStyle(fontSize: 20)),
