@@ -41,6 +41,7 @@ class VerifyScreenState extends State<VerifyOtpScreen> {
     me() {
       id,
       full_name,
+      credit_score,
       account {
         id
       },

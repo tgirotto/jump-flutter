@@ -64,7 +64,7 @@ class LoansScreenState extends State<LoansScreen> {
             variables: {
               'offset': pageSize * pageNumber,
               'limit': pageSize,
-              'company_id': 5
+              'company_id': widget.company?.id
             },
           ),
           builder: (QueryResult result,
@@ -98,7 +98,7 @@ class LoansScreenState extends State<LoansScreen> {
               variables: {
                 'offset': pageSize * pageNumber,
                 'limit': pageSize,
-                'company_id': 5
+                'company_id': widget.company?.id
               },
               updateQuery: (previousResultData, fetchMoreResultData) {
                 // this is where you combine your previous data and response
@@ -139,15 +139,18 @@ class LoansScreenState extends State<LoansScreen> {
                                 locale: "en_US", name: "TSh", decimalDigits: 2)
                             .format(loans[index].principal)),
                         onTap: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoanDetailsScreen(
-                                        user: widget.user,
-                                        loan: loans[index],
-                                        company: widget.company,
-                                        store: widget.store,
-                                      )))
+                          Navigator.of(context)
+                              .pushReplacement(PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                LoanDetailsScreen(
+                              user: widget.user,
+                              loan: loans[index],
+                              store: widget.store,
+                              company: widget.company,
+                            ),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ))
                         },
                       );
 //                 }
@@ -187,7 +190,8 @@ String members = """
         principal,
         customer {
           id,
-          full_name
+          full_name,
+          credit_score
         }
       }
     }

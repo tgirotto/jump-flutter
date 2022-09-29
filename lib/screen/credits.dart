@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:greece/model/company.dart';
+import 'package:greece/model/credit.dart';
 import 'package:greece/model/edge.dart';
 import 'package:greece/model/loan.dart';
 import 'package:greece/model/page.dart' as p;
 import 'package:greece/model/store.dart' as s;
 import 'package:greece/model/user.dart';
+import 'package:greece/screen/credit_details.dart';
 import 'package:greece/screen/home.dart';
 import 'package:greece/screen/loan_details.dart';
 import 'package:greece/screen/member_new.dart';
@@ -24,7 +26,7 @@ class CreditsScreen extends StatefulWidget {
 class CreditsScreenState extends State<CreditsScreen> {
   final pageSize = 100;
   int pageNumber = 0;
-  late p.Page<Loan> page;
+  late p.Page<Credit> page;
   late FetchMoreOptions opts;
   late QueryResult result;
   late FetchMore? fetchMore;
@@ -64,7 +66,7 @@ class CreditsScreenState extends State<CreditsScreen> {
             variables: {
               'offset': pageSize * pageNumber,
               'limit': pageSize,
-              'company_id': 5
+              'company_id': widget.company?.id
             },
           ),
           builder: (QueryResult result,
@@ -88,17 +90,17 @@ class CreditsScreenState extends State<CreditsScreen> {
                   'Both data and errors are null, this is a known bug after refactoring, you might forget to set Github token');
             }
 
-            page = p.Page<Loan>.fromJson(
-                result.data?['getCredits'], Loan.fromJson);
+            page = p.Page<Credit>.fromJson(
+                result.data?['getCredits'], Credit.fromJson);
 
-            final List<Loan> loans =
-                page.entries.map((Entry<Loan> e) => e.node).toList();
+            final List<Credit> credits =
+                page.entries.map((Entry<Credit> e) => e.node).toList();
 
             opts = FetchMoreOptions(
               variables: {
                 'offset': pageSize * pageNumber,
                 'limit': pageSize,
-                'company_id': 5
+                'company_id': widget.company?.id
               },
               updateQuery: (previousResultData, fetchMoreResultData) {
                 // this is where you combine your previous data and response
@@ -131,23 +133,26 @@ class CreditsScreenState extends State<CreditsScreen> {
                 },
                 child: ListView.builder(
                     controller: scrollController,
-                    itemCount: loans.length,
+                    itemCount: credits.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                        title: Text(loans[index].customer!.fullName),
-                        subtitle: Text(NumberFormat.simpleCurrency(
+                        subtitle: const Text("via mPesa"),
+                        title: Text(NumberFormat.simpleCurrency(
                                 locale: "en_US", name: "TSh", decimalDigits: 2)
-                            .format(loans[index].principal)),
+                            .format(credits[index].principal)),
                         onTap: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoanDetailsScreen(
-                                        user: widget.user,
-                                        loan: loans[index],
-                                        company: widget.company,
-                                        store: widget.store,
-                                      )))
+                          Navigator.of(context)
+                              .pushReplacement(PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                CreditDetailsScreen(
+                              user: widget.user,
+                              credit: credits[index],
+                              store: widget.store,
+                              company: widget.company,
+                            ),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ))
                         },
                       );
 //                 }
@@ -186,7 +191,12 @@ String members = """
         id,
         principal,
         interest,
-        period_days
+        period_days,
+        company {
+          id,
+          name,
+          credit_score
+        }
       }
     }
   }

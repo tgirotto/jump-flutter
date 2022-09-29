@@ -10,6 +10,7 @@ class User extends Entity {
   Company? company;
   s.Store? store;
   String? userType;
+  double creditScore;
 
   User(
       {this.id,
@@ -18,6 +19,7 @@ class User extends Entity {
       required this.store,
       this.email,
       required this.company,
+      required this.creditScore,
       this.userType})
       : super();
 
@@ -29,12 +31,13 @@ class User extends Entity {
 
     Company? company;
     if (json['company'] != null) {
-      store = s.Store.fromJson(json['company']);
+      company = Company.fromJson(json['company']);
     }
 
     User u = User(
         fullName: json['full_name'],
         id: json['id'],
+        creditScore: json['credit_score'].toDouble(),
         phone: json['phone'],
         company: company,
         store: store,

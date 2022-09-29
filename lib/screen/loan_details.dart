@@ -5,6 +5,7 @@ import 'package:greece/model/company.dart';
 import 'package:greece/model/loan.dart';
 import 'package:greece/model/store.dart' as s;
 import 'package:greece/model/user.dart';
+import 'package:greece/screen/home.dart';
 import 'package:greece/screen/loans.dart';
 import 'package:intl/intl.dart';
 
@@ -45,7 +46,7 @@ class LoanDetailsScreenState extends State<LoanDetailsScreen> {
             icon: const Icon(Icons.arrow_back),
             onPressed: () => {
               Navigator.of(context).pushReplacement(PageRouteBuilder(
-                pageBuilder: (context, animation1, animation2) => LoansScreen(
+                pageBuilder: (context, animation1, animation2) => HomeScreen(
                     user: widget.user,
                     store: widget.store,
                     company: widget.company),

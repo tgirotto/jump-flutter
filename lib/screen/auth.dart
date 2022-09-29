@@ -19,6 +19,7 @@ class AuthScreen extends StatelessWidget {
     me() {
       id,
       full_name,
+      credit_score,
       user_type,
       account {
         id,
@@ -27,6 +28,7 @@ class AuthScreen extends StatelessWidget {
       company {
         id,
         name,
+        credit_score
       }
     }
   }
