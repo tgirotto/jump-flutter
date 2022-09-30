@@ -38,7 +38,7 @@ class CreditRedemptionConfirmationScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Confirm"),
+        title: const Text("Confirmed"),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -56,16 +56,7 @@ class CreditRedemptionConfirmationScreenState
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          // Padding(
-          //     padding: const EdgeInsets.only(top: 8.0),
-          //     child: Theme(
-          //         data: ThemeData(
-          //           primaryColor: Colors.redAccent,
-          //           primaryColorDark: Colors.red,
-          //         ),
-          //         child: Text("Loan to: ${widget.customer.fullName}"))),
-        ]),
+        child: Column(children: [Text("Confirmed!")]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(

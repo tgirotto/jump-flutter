@@ -191,7 +191,29 @@ class HomeScreenState extends State<HomeScreen> {
                   children: creditCards,
                 ));
 
-            widgets.add(creditList);
+            if (creditCards.isNotEmpty) {
+              widgets.add(creditList);
+            } else {
+              widgets.add(
+                Card(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: InkWell(
+                    splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {
+                      debugPrint('Card tapped.');
+                    },
+                    child: Container(
+                      height: 150,
+                      child: Center(
+                          child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [Text("No credits available")],
+                      )),
+                    ),
+                  ),
+                ),
+              );
+            }
             widgets.add(TextButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(PageRouteBuilder(

@@ -14,7 +14,7 @@ class CreditRedemptionReviewScreen extends StatefulWidget {
   final s.Store? store;
   final Company? company;
   final Credit credit;
-  final User customer;
+  final User? customer;
 
   CreditRedemptionReviewScreen(
       {Key? key,
@@ -56,7 +56,7 @@ class CreditRedemptionReviewScreenState
     QueryResult result = await GraphQL.client
         .mutate(MutationOptions(document: gql(searchUserQuery), variables: {
       'credit_id': widget.credit.id,
-      'customer_id': widget.customer.id,
+      'customer_id': widget.customer?.id,
     }));
 
     if (result.data == null || result.data!['createLoan'] == null) {
@@ -105,22 +105,13 @@ class CreditRedemptionReviewScreenState
                     primaryColor: Colors.redAccent,
                     primaryColorDark: Colors.red,
                   ),
-                  child: Text("Loan to: ${widget.customer.fullName}"))),
+                  child: Text("Loan to: ${widget.customer?.fullName}"))),
         ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           createLoan();
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => CheckoutReviewScreen(
-          //               user: widget.user,
-          //               basket: widget.basket,
-          //               company: widget.company,
-          //               store: widget.store,
-          //             )));
         },
         backgroundColor: Colors.blue,
         icon: const Icon(Icons.shopping_bag),

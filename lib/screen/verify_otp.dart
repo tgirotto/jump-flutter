@@ -47,7 +47,8 @@ class VerifyScreenState extends State<VerifyOtpScreen> {
       },
       company {
         id,
-        name
+        name,
+        credit_score
       }
     }
   }

@@ -53,6 +53,7 @@ android {
         versionName flutterVersionName
 
         minSdkVersion 18
+        compileSdkVersion 32
     }
 
     buildTypes {

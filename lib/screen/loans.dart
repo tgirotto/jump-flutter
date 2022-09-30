@@ -190,7 +190,7 @@ String members = """
       entries {
         id,
         principal,
-        credit_status,
+        loan_status,
         customer {
           id,
           full_name,

@@ -6,6 +6,7 @@ import 'package:greece/model/credit.dart';
 import 'package:greece/model/loan.dart';
 import 'package:greece/model/store.dart' as s;
 import 'package:greece/model/user.dart';
+import 'package:greece/screen/credit_redemption_review.dart';
 import 'package:greece/screen/customer_new.dart';
 import 'package:greece/screen/home.dart';
 import 'package:greece/screen/loans.dart';
@@ -204,15 +205,21 @@ class CreditPhoneVerificationScreenState
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //         builder: (context) => CheckoutReviewScreen(
-          //               user: widget.user,
-          //               basket: widget.basket,
-          //               company: widget.company,
-          //               store: widget.store,
-          //             )));
+          if (searchedUser == null) {
+            return;
+          }
+
+          Navigator.of(context).pushReplacement(PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) =>
+                CreditRedemptionReviewScreen(
+                    user: widget.user,
+                    store: widget.store,
+                    customer: searchedUser,
+                    credit: widget.credit,
+                    company: widget.company),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ));
         },
         backgroundColor: Colors.blue,
         icon: const Icon(Icons.shopping_bag),

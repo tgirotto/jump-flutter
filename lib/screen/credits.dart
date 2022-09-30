@@ -100,7 +100,7 @@ class CreditsScreenState extends State<CreditsScreen> {
               variables: {
                 'offset': pageSize * pageNumber,
                 'limit': pageSize,
-                'company_id': widget.company?.id
+                'company_id': widget.company?.id,
               },
               updateQuery: (previousResultData, fetchMoreResultData) {
                 // this is where you combine your previous data and response
