@@ -34,6 +34,8 @@ String homeQuery = """
       credits {
         id,
         principal,
+        interest,
+        period_days,
         credit_status
       }
     }

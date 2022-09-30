@@ -60,36 +60,54 @@ class CreditDetailsScreenState extends State<CreditDetailsScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          // Text(DateFormat('yyyy-MM-dd HH:mm:ss').format(loan.applied_at) +
-          //     " - " +
-          //     loan.message),
-          // Text(NumberFormat.simpleCurrency(
-          //         locale: "en_US", name: "TSh", decimalDigits: 2)
-          //     .format(loan.amount)),
-          // Expanded(
-          //     child: Align(
-          //         alignment: Alignment.bottomCenter,
-          //         child: SizedBox(
-          //             height: 50,
-          //             width: double.infinity, // <-- match_parent
-          //             child: ElevatedButton(
-          //               style: ButtonStyle(
-          //                   shape: MaterialStateProperty.all<
-          //                           RoundedRectangleBorder>(
-          //                       RoundedRectangleBorder(
-          //                 borderRadius: BorderRadius.circular(5.0),
-          //               ))),
-          //               onPressed: () {
-          //                 removeExpense();
-          //               },
-          //               child: const Text('Delete',
-          //                   style: TextStyle(fontSize: 20)),
-          //               // color: Colors.blue,
-          //               // textColor: Colors.white,
-          //               // elevation: 5,
-          //             ))))
-        ]),
+        child: Center(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+              Text(
+                "Principal: " +
+                    NumberFormat.simpleCurrency(
+                            locale: "en_US", name: "TSh", decimalDigits: 2)
+                        .format(widget.credit.principal),
+                // style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                "Interest: " + widget.credit.interest.toString() + "%",
+                // style: TextStyle(fontSize: 30),
+              ),
+              Text("Loan length: " +
+                  widget.credit.period_days.toString() +
+                  " days")
+              // Text(DateFormat('yyyy-MM-dd HH:mm:ss').format(loan.applied_at) +
+              //     " - " +
+              //     loan.message),
+              // Text(NumberFormat.simpleCurrency(
+              //         locale: "en_US", name: "TSh", decimalDigits: 2)
+              //     .format(loan.amount)),
+              // Expanded(
+              //     child: Align(
+              //         alignment: Alignment.bottomCenter,
+              //         child: SizedBox(
+              //             height: 50,
+              //             width: double.infinity, // <-- match_parent
+              //             child: ElevatedButton(
+              //               style: ButtonStyle(
+              //                   shape: MaterialStateProperty.all<
+              //                           RoundedRectangleBorder>(
+              //                       RoundedRectangleBorder(
+              //                 borderRadius: BorderRadius.circular(5.0),
+              //               ))),
+              //               onPressed: () {
+              //                 removeExpense();
+              //               },
+              //               child: const Text('Delete',
+              //                   style: TextStyle(fontSize: 20)),
+              //               // color: Colors.blue,
+              //               // textColor: Colors.white,
+              //               // elevation: 5,
+              //             ))))
+            ])),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: (widget.credit.creditStatus == 'INITIALISED')

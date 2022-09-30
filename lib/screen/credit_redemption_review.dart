@@ -8,6 +8,7 @@ import 'package:greece/model/user.dart';
 import 'package:greece/screen/credit_redemption_confirmation.dart';
 import 'package:greece/screen/customer_new.dart';
 import 'package:greece/screen/home.dart';
+import 'package:intl/intl.dart';
 
 class CreditRedemptionReviewScreen extends StatefulWidget {
   final User user;
@@ -96,18 +97,28 @@ class CreditRedemptionReviewScreenState
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Theme(
-                  data: ThemeData(
-                    primaryColor: Colors.redAccent,
-                    primaryColorDark: Colors.red,
-                  ),
-                  child: Text("Loan to: ${widget.customer?.fullName}"))),
-        ]),
-      ),
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Loan to: ${widget.customer?.fullName}"),
+              Text(
+                "Principal: " +
+                    NumberFormat.simpleCurrency(
+                            locale: "en_US", name: "TSh", decimalDigits: 2)
+                        .format(widget.credit.principal),
+                // style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                "Interest: " + widget.credit.interest.toString() + "%",
+                // style: TextStyle(fontSize: 30),
+              ),
+              Text("Loan length: " +
+                  widget.credit.period_days.toString() +
+                  " days")
+            ],
+          ))),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

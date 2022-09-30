@@ -191,6 +191,8 @@ String members = """
         id,
         principal,
         loan_status,
+        period_days,
+        credit_status,
         customer {
           id,
           full_name,

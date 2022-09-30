@@ -56,7 +56,31 @@ class CreditRedemptionConfirmationScreenState
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(children: [Text("Confirmed!")]),
+        child: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Text(
+                "Success!",
+                style: TextStyle(fontSize: 40),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Text(
+                "Our agents will send you the funds shortly.",
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Text(
+                "The customer will receive an SMS with the details of the loan",
+              ),
+            ),
+          ],
+        )),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(

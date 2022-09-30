@@ -21,8 +21,8 @@ class SignupScreenState extends State<SignupScreen> {
   bool isLoading = false;
 
   final String signupGqlQuery = """
-  mutation signup(\$signupInput: SignupInput!) {
-    signup(signupInput: \$signupInput) {
+  mutation signup(\$phone: String!, \$full_name: String!, \$email: String!, \$company_name: String!, \$vat: String!, \$registration_number: String!) {
+    signup(phone: \$phone, full_name: \$full_name, email: \$email, company_name: \$company_name, vat: \$vat, registration_number: \$registration_number) {
       access_token,
       refresh_token
     }
@@ -110,12 +110,12 @@ class SignupScreenState extends State<SignupScreen> {
     QueryResult result = await GraphQL.client.mutate(MutationOptions(
       document: gql(signupGqlQuery),
       variables: {
-        'signupInput': {
-          'phone': "+255${phoneController.text}",
-          'email': emailController.text,
-          'company_name': companyNameController.text,
-          'full_name': fullNameController.text,
-        }
+        'phone': "+255${phoneController.text}",
+        'email': emailController.text,
+        'company_name': companyNameController.text,
+        'full_name': fullNameController.text,
+        'vat': '',
+        'registration_number': '',
       },
     ));
 

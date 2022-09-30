@@ -6,12 +6,16 @@ class Credit extends Entity {
   int id;
   Company? company;
   double principal;
+  double interest;
+  int period_days;
   String creditStatus;
 
   Credit(
       {required this.id,
       this.company,
       required this.principal,
+      required this.interest,
+      required this.period_days,
       required this.creditStatus});
 
   static Credit fromJson(Map<String, dynamic> json) {
@@ -25,6 +29,8 @@ class Credit extends Entity {
         id: json['id'],
         creditStatus: json['credit_status'],
         company: company,
+        interest: json['interest'].toDouble(),
+        period_days: json['period_days'],
         principal: json['principal'].toDouble());
   }
 }
