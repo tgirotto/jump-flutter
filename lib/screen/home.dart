@@ -218,15 +218,15 @@ class HomeScreenState extends State<HomeScreen> {
             }
             widgets.add(TextButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(PageRouteBuilder(
-                  pageBuilder: (context, animation1, animation2) => LoansScreen(
-                    user: widget.user,
-                    store: widget.store,
-                    company: widget.company,
-                  ),
-                  transitionDuration: Duration.zero,
-                  reverseTransitionDuration: Duration.zero,
-                ));
+                // Navigator.of(context).pushReplacement(PageRouteBuilder(
+                //   pageBuilder: (context, animation1, animation2) => LoansScreen(
+                //     user: widget.user,
+                //     store: widget.store,
+                //     company: widget.company,
+                //   ),
+                //   transitionDuration: Duration.zero,
+                //   reverseTransitionDuration: Duration.zero,
+                // ));
               },
               child: const Text(
                 "Your pending loans",
@@ -239,17 +239,17 @@ class HomeScreenState extends State<HomeScreen> {
                 child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      Navigator.of(context).pushReplacement(PageRouteBuilder(
-                        pageBuilder: (context, animation1, animation2) =>
-                            LoanDetailsScreen(
-                          user: widget.user,
-                          store: widget.store,
-                          loan: e,
-                          company: widget.company,
-                        ),
-                        transitionDuration: Duration.zero,
-                        reverseTransitionDuration: Duration.zero,
-                      ));
+                      // Navigator.of(context).pushReplacement(PageRouteBuilder(
+                      //   pageBuilder: (context, animation1, animation2) =>
+                      //       LoanDetailsScreen(
+                      //     user: widget.user,
+                      //     store: widget.store,
+                      //     loan: e,
+                      //     company: widget.company,
+                      //   ),
+                      //   transitionDuration: Duration.zero,
+                      //   reverseTransitionDuration: Duration.zero,
+                      // ));
                     },
                     child: Container(
                       height: 50,

@@ -44,20 +44,20 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<ListTile> tiles = [
-      ListTile(
-        title: const Text("Members"),
-        onTap: () {
-          // Navigator.of(context).pushReplacement(PageRouteBuilder(
-          //   pageBuilder: (context, animation1, animation2) => MembersScreen(
-          //     user: user,
-          //     store: store,
-          //     company: company,
-          //   ),
-          //   transitionDuration: Duration.zero,
-          //   reverseTransitionDuration: Duration.zero,
-          // ));
-        },
-      ),
+      // ListTile(
+      //   title: const Text("Members"),
+      //   onTap: () {
+      //     // Navigator.of(context).pushReplacement(PageRouteBuilder(
+      //     //   pageBuilder: (context, animation1, animation2) => MembersScreen(
+      //     //     user: user,
+      //     //     store: store,
+      //     //     company: company,
+      //     //   ),
+      //     //   transitionDuration: Duration.zero,
+      //     //   reverseTransitionDuration: Duration.zero,
+      //     // ));
+      //   },
+      // ),
       ListTile(
           title: const Text("Logout"),
           onTap: () => {
